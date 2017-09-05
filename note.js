@@ -19,9 +19,10 @@ function displayNotes(retnotelist) {
 
 function loadOld() {
     var retnotelist = localStorage.getItem('Notelist');
-    retnotelist = JSON.parse(retnotelist);
-    notelist = retnotelist;
-    displayNotes(retnotelist);
+    if (retnotelist !== null) {
+        notelist = JSON.parse(retnotelist);
+    }
+    displayNotes(notelist);
 }
 function noteListen() {
     document.getElementById('note').addEventListener("keydown", function (event) {
