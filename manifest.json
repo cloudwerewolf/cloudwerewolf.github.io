@@ -2,5 +2,8 @@
     "name": "NotePen",
     "short_name": "NotePen",
     "start_url": ".",
-    "display": "standalone"
+    "display": "standalone",
+    "background_color": "#fff",
+    "theme_color": "#fff8dc",
+    
 }
