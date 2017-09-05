@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>NotePen</title>
+        <link rel="stylesheet" href="main.css">
+        <link href='https://fonts.googleapis.com/css?family=Scope One' rel='stylesheet'>
+        <script type="text/javascript"src="note.js"></script>
+    </head>
+    <body onload="noteListen(); loadOld()">
+        <h1>NotePen</h1>
+        <h3>New Note</h3>
+        
+        <div class="inputForm">   
+            <textarea cols="20" rows="1" id="notehead" draggable="false"></textarea><br>
+            <textarea cols="45" rows="5" id="note" draggable="false"></textarea><br>
+            <input type="Submit" value="Save" id="save" onclick="addNote(notehead.value,note.value)">
+            <input type="Submit" value="Delete Notes" id="del" onclick="deleteNotes()">
+        </div>
+        <br><hr>    
+        <h3 style="text-align: center">Wall</h3>
+        <div class="notes" style="text-align: center" id="notepage">
+
+        </div>
+    </body>
+</html>
