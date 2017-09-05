@@ -2,13 +2,15 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
+        <meta name="theme-color" content="#b8860b">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>NotePen</title>
         <link rel="stylesheet" href="main.css">
         <link href='https://fonts.googleapis.com/css?family=Scope One' rel='stylesheet'>
         <link rel="manifest" href="/manifest.json">
         <script type="text/javascript" src="note.js"></script>
     </head>
-    <body onload="noteListen(); loadOld()">
+    <body onload="noteListen(); loadOld(); regoSW();">
         <h1>NotePen</h1>
         <h3>New Note</h3>
         
@@ -23,12 +25,5 @@
         <div class="notes" style="text-align: center" id="notepage">
 
         </div>
-        <script>
-            if('serviceWorker' in navigator) {
-              navigator.serviceWorker
-                       .register('/sw.js')
-                       .then(function() { console.log("Service Worker Registered"); });
-            }
-        </script>
     </body>
 </html>
