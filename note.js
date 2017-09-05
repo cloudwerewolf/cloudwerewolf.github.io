@@ -1,9 +1,6 @@
 var notelist = [];
 
-function loadOld() {
-    var retnotelist = localStorage.getItem('Notelist');
-    retnotelist = JSON.parse(retnotelist);
-    notelist = retnotelist;
+function displayNotes(retnotelist) {
     var div = document.getElementById("notepage");
     for (var notes in retnotelist){
         var text = document.createElement("textarea");
@@ -18,6 +15,13 @@ function loadOld() {
         else { text.value = retnotelist[notes].note;}
         div.appendChild(text);
     }
+}
+
+function loadOld() {
+    var retnotelist = localStorage.getItem('Notelist');
+    retnotelist = JSON.parse(retnotelist);
+    notelist = retnotelist;
+    displayNotes(retnotelist);
 }
 function noteListen() {
     document.getElementById('note').addEventListener("keydown", function (event) {
@@ -35,7 +39,7 @@ function noteListen() {
 }
 function addNote(head, text) {
     saveNote(head, text);
-    displayNotes();
+    clearNotes();
 }
 function saveNote(head, text) {
     notelist.unshift({"title": head, "note": text});
@@ -45,32 +49,19 @@ function saveNote(head, text) {
     head.value = "";
     body.value = "";
 }
-function displayNotes() {
+function clearNotes() {
     var retnotelist = localStorage.getItem('Notelist');
     retnotelist = JSON.parse(retnotelist);
     var div = document.getElementById("notepage");
     while (div.hasChildNodes()) {
         div.removeChild(div.lastChild);
     }
-    for (var notes in retnotelist){
-        var text = document.createElement("textarea");
-        text.name = "notes"
-        text.cols = 45;
-        text.rows = 5;
-        text.className = "notelist";
-        this.id = notes;
-        if (retnotelist[notes].title != "") {
-            text.value = retnotelist[notes].title.toUpperCase() + '\n' + retnotelist[notes].note;
-        }
-        else { text.value = retnotelist[notes].note;}
-        div.appendChild(text);
-    }
+    displayNotes(retnotelist);
 }
 function deleteNotes() {
     localStorage.removeItem('Notelist');
     notelist = [];
     localStorage.setItem('Notelist', JSON.stringify(notelist));
-    retnotelist = [];
     var div = document.getElementById("notepage");
     while (div.hasChildNodes()) {
         div.removeChild(div.lastChild);
