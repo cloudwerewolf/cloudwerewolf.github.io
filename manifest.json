@@ -1,0 +1,6 @@
+{
+    "name": "NotePen",
+    "short_name": "NotePen",
+    "start_url": ".",
+    "display": "standalone"
+}
