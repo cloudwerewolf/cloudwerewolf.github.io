@@ -22,32 +22,13 @@ h1 {
     text-align: center;
 }
 
-h2, h3, h4, h5, h6 {
-    color: #222;
+h3{
+    color: #696969;
     font-weight: 600;
     line-height: 1.3;
     font-family: 'Scope One';
 }
 
-h2 {
-    margin-top: 1.3em;
-}
-
-h3 {
-    color: #696969;
-}
-
-a {
-    color: #0083e8;
-}
-
-b, strong {
-    font-weight: 600;
-}
-
-samp {
-    color: white;
-}
 textarea {
     font-family: 'Scope One';
     background-color: cornsilk;
@@ -71,17 +52,6 @@ input {
     text-align: center;
 }
 
-@keyframes colorize {
-    0% {
-        -webkit-filter: grayscale(100%);
-        filter: grayscale(100%);
-    }
-    100% {
-        -webkit-filter: grayscale(0%);
-        filter: grayscale(0%);
-    }
-}
-
 textarea.notelist {
     display: inline-grid;
     border-color: white;
@@ -89,4 +59,3 @@ textarea.notelist {
     box-sizing: border-box;
     outline-color: rgba(224, 215, 179, 0.85);
 }
-
