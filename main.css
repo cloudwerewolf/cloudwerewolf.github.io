@@ -53,7 +53,7 @@ textarea.notelist {
     box-sizing: border-box;
     outline-color: rgba(224, 215, 179, 0.85);
 }
-@media screen and (orientation:portrait) {
+@media screen and (orientation:landscape) {
     textarea {
         width: 43.5%;
     }
