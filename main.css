@@ -61,8 +61,10 @@ textarea.notelist {
 @media screen and (orientation:portrait) {
     textarea {
         width: 80%;
+        min-width: 80%;
     }
     #notehead {
         width: 35%;
+        min-width: 35%;
     }
 }
