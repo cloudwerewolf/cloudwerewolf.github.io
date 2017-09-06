@@ -53,8 +53,15 @@ textarea.notelist {
     box-sizing: border-box;
     outline-color: rgba(224, 215, 179, 0.85);
 }
-@media screen and (max-width: 800px) {
+@media screen and (min-width: 100px) {
     textarea {
-        width: 50%;
+        width: 43.5%;
     }
+    #notehead {
+        width: 20.5%;
+    }
+    input {
+        width: 11.25%;
+    }
+    
 }
