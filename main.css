@@ -28,6 +28,8 @@ textarea {
     background-color: cornsilk;
     border-color: rgba(184, 134, 11, 0.85);
     resize: none;
+    width: 80%;
+    max-width: 357px;
 }
 input {
     font-family: 'Scope One';
@@ -37,6 +39,8 @@ input {
 }
 #notehead {
     height:25px;
+    width: 35%;
+    max-width: 170px;
 }
 .inputForm {
     text-align: center;
@@ -47,23 +51,4 @@ textarea.notelist {
     border-width: 8px;
     box-sizing: border-box;
     outline-color: rgba(224, 215, 179, 0.85);
-}
-@media screen and (orientation:landscape) {
-    textarea {
-        width: 43.5%;
-    }
-    #notehead {
-        width: 20.5%;
-    }
-    #reH {
-        font-size: 24px;
-    }
-}
-@media screen and (orientation:portrait) {
-    textarea {
-        width: 80%;
-    }
-    #notehead {
-        width: 35%;
-    }
 }
