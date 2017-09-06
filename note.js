@@ -1,6 +1,10 @@
 var notelist = [];
 
-function displayNotes(retnotelist) {
+function displayNotes() {
+    var retnotelist = localStorage.getItem('Notelist');
+    if (retnotelist !== null) {
+        retnotelist = JSON.parse(retnotelist);
+    }
     var div = document.getElementById("notepage");
     for (var notes in retnotelist){
         var text = document.createElement("textarea");
@@ -16,13 +20,8 @@ function displayNotes(retnotelist) {
         div.appendChild(text);
     }
 }
-
 function loadOld() {
-    var retnotelist = localStorage.getItem('Notelist');
-    if (retnotelist !== null) {
-        notelist = JSON.parse(retnotelist);
-    }
-    displayNotes(notelist);
+    displayNotes();
 }
 function noteListen() {
     document.getElementById('note').addEventListener("keydown", function (event) {
@@ -50,28 +49,25 @@ function saveNote(head, text) {
     head.value = "";
     body.value = "";
 }
-function clearNotes() {
-    var retnotelist = localStorage.getItem('Notelist');
-    retnotelist = JSON.parse(retnotelist);
+function clearWall() {
     var div = document.getElementById("notepage");
     while (div.hasChildNodes()) {
         div.removeChild(div.lastChild);
     }
-    displayNotes(retnotelist);
+}
+function clearNotes() {
+    clearWall();
+    displayNotes();
 }
 function deleteNotes() {
     localStorage.removeItem('Notelist');
     notelist = [];
     localStorage.setItem('Notelist', JSON.stringify(notelist));
-    var div = document.getElementById("notepage");
-    while (div.hasChildNodes()) {
-        div.removeChild(div.lastChild);
-    }
+    clearWall();
 }
 function regoSW() {
     if('serviceWorker' in navigator) {
       navigator.serviceWorker
-               .register('/sw.js')
-               .then(function() { console.log("Service Worker Registered"); });
+               .register('/sw.js');
     }
 }
