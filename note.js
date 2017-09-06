@@ -38,8 +38,10 @@ function noteListen() {
     });
 }
 function addNote(head, text) {
-    saveNote(head, text);
-    clearNotes();
+    if (head !== "" || text !== "") {
+        saveNote(head, text);
+        clearNotes();
+    }
 }
 function saveNote(head, text) {
     notelist.unshift({"title": head, "note": text});
