@@ -23,8 +23,7 @@ function shareNote(id) {
     if (typeof navigator.share !== 'undefined') {
         event.preventDefault();
         navigator.share({ title: "NotePen Note", text: notes.value })
-        .then(function() {console.log("shared");})
-        .catch(function() {console.log("failed");});
+        .catch(function() {alert("Sorry, sharing is not supported by this browser.")});
     }
 }
 function showBtn(id) {
@@ -65,7 +64,7 @@ function displayNotes() {
         var xBtn = document.createElement("input");
         xBtn.type = "Submit";
         xBtn.className = "delBtn";
-        xBtn.value = "X";
+        xBtn.value = "❌";
         xBtn.id = notes + "btn";
         xBtn.noteid = notes;
         xBtn.onmouseup = function() {delNote(this.noteid);};
@@ -74,7 +73,7 @@ function displayNotes() {
         var shrBtn = document.createElement("input");
         shrBtn.type = "Submit";
         shrBtn.className = "share";
-        shrBtn.value = "✔";
+        shrBtn.value = "⤿";
         shrBtn.id = notes + "shr";
         shrBtn.noteid = notes;
         shrBtn.onmouseup = function() {shareNote(this.noteid);};

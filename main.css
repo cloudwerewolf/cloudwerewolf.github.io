@@ -68,7 +68,7 @@ textarea.notelist {
     text-align: right;
 }
 .delBtn {
-    background-color: red;
+    background-color: rgba(255, 39, 39, 0.7);
     margin: 0;
     position: relative;
     top: 30px;
@@ -76,6 +76,7 @@ textarea.notelist {
     right: -30px;
 }
 .share {
+    background-color: rgba(105, 105, 105, 0.7);
     top: 96px;
     width: 30px;
     position: relative;
