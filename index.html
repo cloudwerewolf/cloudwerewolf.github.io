@@ -18,10 +18,23 @@
             <textarea aria-label="Note Body" cols="45" rows="5" id="note"></textarea><br>
             <input type="Submit" value="Save" id="save" onclick="addNote(notehead.value,note.value)">
             <input type="Submit" value="Delete Notes" id="del" onclick="deleteNotes()">
+            
         </div>
         <br><hr>    
         <h3 style="text-align: center" id="reH">Wall</h3>
         <div class="notes" style="text-align: center" id="notepage">
+            <div class="noteholder">
+                <span class="notebuttons"><button>X</button></span>
+                <textarea class="notelist" cols="45" rows="5"></textarea>
+            </div>  
+            <div class="noteholder">
+                <span class="notebuttons"><button>X</button></span>
+                <textarea class="notelist" cols="45" rows="5"></textarea>
+            </div>
+            <div class="noteholder">
+                <span class="notebuttons"><button>X</button></span>
+                <textarea class="notelist" cols="45" rows="5"></textarea>
+            </div>  
         </div>
     </body>
 </html>

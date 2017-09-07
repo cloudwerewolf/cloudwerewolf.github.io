@@ -28,8 +28,7 @@ textarea {
     background-color: cornsilk;
     border-color: rgba(184, 134, 11, 0.85);
     resize: none;
-    width: 80%;
-    max-width: 357px;
+    width: 100%;
 }
 input {
     font-family: 'Scope One';
@@ -42,13 +41,36 @@ input {
     width: 35%;
     max-width: 170px;
 }
+#note {
+    max-width: 357px;
+}
 .inputForm {
     text-align: center;
 }
 textarea.notelist {
     display: inline-grid;
-    border-color: white;
-    border-width: 8px;
     box-sizing: border-box;
     outline-color: rgba(224, 215, 179, 0.85);
+    max-width: none;
+    border-width: 0;
+}
+.noteholder {
+    display: inline-grid;
+    padding-left: 10px;
+    padding-right: 10px;
+    max-width: 365px;
+    position: relative;
+}
+.noteholder span.notebuttons {
+    display: inline-block;
+    text-align: right;
+}
+.noteholder span.notebuttons button {
+    background-color: red;
+    border: 0;
+    margin: 0;
+    position: relative;
+    top: 30px;
+    width: 30px;
+    height: 30px;
 }
