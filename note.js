@@ -22,8 +22,10 @@ function shareNote(id) {
     var notes = document.getElementById(id);
     if (typeof navigator.share !== 'undefined') {
         event.preventDefault();
-        navigator.share({ title: "NotePen Note", text: notes.value })
-        .catch(function() {alert("Sorry, sharing is not supported by this browser.")});
+        navigator.share({ title: "NotePen Note", text: notes.value });
+    }
+    else {
+        alert("Sorry, sharing is not supported by this browser.");
     }
 }
 function showBtn(id) {
