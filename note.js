@@ -2,7 +2,7 @@ var notelist = [];
 function fade(element) {
     var op = 1;
     var timer = setInterval(function () {
-        if (op <= 0.1){
+        if (op <= 0.1) {
             clearInterval(timer);
             element.style.visibility = "hidden";
         }
@@ -14,17 +14,29 @@ function fade(element) {
 function delNote(id) {
     id = id[0];
     var note = document.getElementById(id);
-    var notediv = note.parentNode
-    console.log(notediv);
+    var notediv = note.parentNode;
     var div = document.getElementById("notepage");
     div.removeChild(notediv);
     notelist.splice(id, 1);
+}
+function shareNote(id) {
+    id = id[0];
+    var note = document.getElementById(id);
+    if (typeof navigator.share !== 'undefined') {
+        event.preventDefault();
+        navigator.share({ title: note.notehead.value, text: note.note.value })
+        .then(function() {console.log("shared");})
+        .catch(function() {console.log("failed");});
+    }
 }
 function showBtn(id) {
     var btn = document.getElementById(id + "btn");
     btn.style.visibility = "visible";
     btn.style.opacity = 1;
-    setTimeout(function() {fade(btn);}, 1500);
+    var shr = document.getElementById(id + "shr");
+    shr.style.visibility = "visible";
+    shr.style.opacity = 1;
+    setTimeout(function() {fade(btn); fade(shr);}, 1500);
 }
 function displayNotes() {
     var retnotelist = localStorage.getItem('Notelist');
@@ -51,12 +63,22 @@ function displayNotes() {
         }
         else { text.value = retnotelist[notes].note;}
         notediv.appendChild(text);
-        var xBtn = document.createElement("button");
-        xBtn.innerHTML = "X";
+        var xBtn = document.createElement("input");
+        xBtn.type = "Submit";
+        xBtn.className = "delBtn";
+        xBtn.value = "X";
         xBtn.id = notes + "btn";
         xBtn.onfocus = function() {delNote(this.id);};
         xBtn.style.visibility = "hidden";
         notespan.appendChild(xBtn);
+        var shrBtn = document.createElement("input");
+        shrBtn.type = "Submit";
+        shrBtn.className = "share";
+        shrBtn.value = "share";
+        shrBtn.id = notes + "shr";
+        shrBtn.onfocus = function() {shareNote(this.id);};
+        shrBtn.style.visibility = "hidden";
+        notespan.appendChild(shrBtn);
     }
 }
 function loadOld() {
