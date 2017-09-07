@@ -12,29 +12,17 @@
     </head>
     <body onload="noteListen(); loadOld(); regoSW();">
         <h1>NotePen</h1>
-        <h3 id="reH">New Note</h3>
+        <h3>New Note</h3>
         <div class="inputForm">   
             <textarea aria-label="Title" cols="20" rows="1" id="notehead"></textarea><br>
             <textarea aria-label="Note Body" cols="45" rows="5" id="note"></textarea><br>
             <input type="Submit" value="Save" id="save" onclick="addNote(notehead.value,note.value)">
-            <input type="Submit" value="Delete Notes" id="del" onclick="deleteNotes()">
             
         </div>
         <br><hr>    
-        <h3 style="text-align: center" id="reH">Wall</h3>
+        <h3 style="text-align: center">Wall</h3>
         <div class="notes" style="text-align: center" id="notepage">
-            <div class="noteholder">
-                <span class="notebuttons"><button>X</button></span>
-                <textarea class="notelist" cols="45" rows="5"></textarea>
-            </div>  
-            <div class="noteholder">
-                <span class="notebuttons"><button>X</button></span>
-                <textarea class="notelist" cols="45" rows="5"></textarea>
-            </div>
-            <div class="noteholder">
-                <span class="notebuttons"><button>X</button></span>
-                <textarea class="notelist" cols="45" rows="5"></textarea>
-            </div>  
+
         </div>
     </body>
 </html>
