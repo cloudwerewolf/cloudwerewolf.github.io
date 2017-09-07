@@ -73,10 +73,10 @@ textarea.notelist {
     position: relative;
     top: 30px;
     width: 30px;
-    right: -50px;
+    right: -30px;
 }
 .share {
     top: 96px;
-    width: 50px;
+    width: 30px;
     position: relative;
 }

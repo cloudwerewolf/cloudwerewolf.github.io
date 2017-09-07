@@ -12,7 +12,6 @@ function fade(element) {
     }, 30);
 }
 function delNote(id) {
-    id = id[0];
     var note = document.getElementById(id);
     var notediv = note.parentNode;
     var div = document.getElementById("notepage");
@@ -20,11 +19,10 @@ function delNote(id) {
     notelist.splice(id, 1);
 }
 function shareNote(id) {
-    id = id[0];
-    var note = document.getElementById(id);
+    var notes = document.getElementById(id);
     if (typeof navigator.share !== 'undefined') {
         event.preventDefault();
-        navigator.share({ title: note.notehead.value, text: note.note.value })
+        navigator.share({ title: "NotePen Note", text: notes.value })
         .then(function() {console.log("shared");})
         .catch(function() {console.log("failed");});
     }
@@ -42,6 +40,7 @@ function displayNotes() {
     var retnotelist = localStorage.getItem('Notelist');
     if (retnotelist !== null) {
         retnotelist = JSON.parse(retnotelist);
+        notelist = retnotelist;
     }
     var div = document.getElementById("notepage");
     for (var notes in retnotelist) {
@@ -68,15 +67,17 @@ function displayNotes() {
         xBtn.className = "delBtn";
         xBtn.value = "X";
         xBtn.id = notes + "btn";
-        xBtn.onfocus = function() {delNote(this.id);};
+        xBtn.noteid = notes;
+        xBtn.onmouseup = function() {delNote(this.noteid);};
         xBtn.style.visibility = "hidden";
         notespan.appendChild(xBtn);
         var shrBtn = document.createElement("input");
         shrBtn.type = "Submit";
         shrBtn.className = "share";
-        shrBtn.value = "share";
+        shrBtn.value = "✔";
         shrBtn.id = notes + "shr";
-        shrBtn.onfocus = function() {shareNote(this.id);};
+        shrBtn.noteid = notes;
+        shrBtn.onmouseup = function() {shareNote(this.noteid);};
         shrBtn.style.visibility = "hidden";
         notespan.appendChild(shrBtn);
     }
