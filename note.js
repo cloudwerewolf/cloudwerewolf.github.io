@@ -24,18 +24,20 @@ function shareNote(id) {
         event.preventDefault();
         navigator.share({ title: "NotePen Note", text: notes.value });
     }
-    else {
-        alert("Sorry, sharing is not supported by this browser.");
-    }
 }
 function showBtn(id) {
     var btn = document.getElementById(id + "btn");
     btn.style.visibility = "visible";
     btn.style.opacity = 1;
-    var shr = document.getElementById(id + "shr");
-    shr.style.visibility = "visible";
-    shr.style.opacity = 1;
-    setTimeout(function() {fade(btn); fade(shr);}, 1500);
+    if (typeof navigator.share !== 'undefined') {
+        var shr = document.getElementById(id + "shr");
+        shr.style.visibility = "visible";
+        shr.style.opacity = 1;
+        setTimeout(function() {fade(btn); fade(shr);}, 1500);
+    }
+    else {
+        setTimeout(function() {fade(btn);}, 1500);
+    }
 }
 function displayNotes() {
     var retnotelist = localStorage.getItem('Notelist');
@@ -47,6 +49,7 @@ function displayNotes() {
     for (var notes in retnotelist) {
         var notediv = document.createElement("div");
         notediv.className = "noteholder";
+        notediv.style.contentEditable = "false";
         div.appendChild(notediv);
         var notespan = document.createElement("span");
         notespan.className = "notebuttons";
@@ -58,6 +61,7 @@ function displayNotes() {
         text.className = "notelist";
         text.onfocus = function() {showBtn(this.id);};
         text.id = notes;
+        text.readOnly = "true";
         if (retnotelist[notes].title != "") {
             text.value = retnotelist[notes].title.toUpperCase() + '\n' + retnotelist[notes].note;
         }
@@ -66,21 +70,23 @@ function displayNotes() {
         var xBtn = document.createElement("input");
         xBtn.type = "Submit";
         xBtn.className = "delBtn";
-        xBtn.value = "❌";
+        xBtn.value = "✖";
         xBtn.id = notes + "btn";
         xBtn.noteid = notes;
         xBtn.onmouseup = function() {delNote(this.noteid);};
         xBtn.style.visibility = "hidden";
         notespan.appendChild(xBtn);
-        var shrBtn = document.createElement("input");
-        shrBtn.type = "Submit";
-        shrBtn.className = "share";
-        shrBtn.value = "⤿";
-        shrBtn.id = notes + "shr";
-        shrBtn.noteid = notes;
-        shrBtn.onmouseup = function() {shareNote(this.noteid);};
-        shrBtn.style.visibility = "hidden";
-        notespan.appendChild(shrBtn);
+        if (typeof navigator.share !== 'undefined') {
+            var shrBtn = document.createElement("input");
+            shrBtn.type = "Submit";
+            shrBtn.className = "share";
+            shrBtn.value = "➥";
+            shrBtn.id = notes + "shr";
+            shrBtn.noteid = notes;
+            shrBtn.onmouseup = function() {shareNote(this.noteid);};
+            shrBtn.style.visibility = "hidden";
+            notespan.appendChild(shrBtn); 
+        }
     }
 }
 function loadOld() {
