@@ -3,14 +3,20 @@ var notelist = [];
 function fade(element) {
     var op = 1;
     var id = element.id;
-    timer[id] = setInterval(function () {
+    if (timer[id] == null) {
+        timer[id] = setInterval(function () {
         if (op <= 0.1) {
             clearInterval(timer[id]);
+            timer[id] = null;
             element.style.visibility = "hidden";
         }
         element.style.opacity = op;
         op -= op * 0.1;
-    }, 30);
+        }, 30);    
+    }
+    else {
+        element.style.opacity = 1;
+    }
 }
 function delNote(id) {
     var note = document.getElementById(id);
