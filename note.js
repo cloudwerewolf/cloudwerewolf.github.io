@@ -72,6 +72,9 @@ function displayNotes() {
         xBtn.id = notes + "btn";
         xBtn.noteid = notes;
         xBtn.onmouseup = function() {delNote(this.noteid);};
+        if (typeof navigator.share == 'undefined') {
+            xBtn.style.right = '0px';
+        }
         notespan.appendChild(xBtn);
         if (typeof navigator.share !== 'undefined') {
             var shrBtn = document.createElement("input");
