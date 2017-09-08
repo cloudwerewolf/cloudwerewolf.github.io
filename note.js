@@ -2,9 +2,10 @@ var timer = [];
 var notelist = [];
 function fade(element) {
     var op = 1;
-    timer[element] = setInterval(function () {
+    var id = element.id;
+    timer[id] = setInterval(function () {
         if (op <= 0.1) {
-            clearInterval(timer[element]);
+            clearInterval(timer[id]);
             element.style.visibility = "hidden";
         }
         element.style.opacity = op;
@@ -29,7 +30,7 @@ function shareNote(id) {
 }
 function showBtn(id) {
     var span = document.getElementById(id + "span");
-    clearInterval(timer[span]);
+    clearInterval(timer[id + "span"]);
     span.style.visibility = "visible";
     span.style.opacity = 1;
     setTimeout(function() {fade(span)}, 2500);
@@ -59,12 +60,10 @@ function displayNotes() {
         text.onclick = function() {showBtn(this.id);};
         text.id = notes;
         text.readOnly = "true";
-        console.log(notes);
         if (retnotelist[notes].title != "") {
             text.value = retnotelist[notes].title.toUpperCase() + '\n' + retnotelist[notes].note;
         }
         else { text.value = retnotelist[notes].note;}
-        console.log(text.value);
         notediv.appendChild(text);
         var xBtn = document.createElement("input");
         xBtn.type = "Submit";
