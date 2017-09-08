@@ -1,13 +1,13 @@
+var timer = [];
 var notelist = [];
 function fade(element) {
     var op = 1;
-    var timer = setInterval(function () {
+    timer[element] = setInterval(function () {
         if (op <= 0.1) {
-            clearInterval(timer);
+            clearInterval(timer[element]);
             element.style.visibility = "hidden";
         }
         element.style.opacity = op;
-        element.style.filter = 'alpha(opacity=' + op * 100 + ")";
         op -= op * 0.1;
     }, 30);
 }
@@ -17,6 +17,8 @@ function delNote(id) {
     var div = document.getElementById("notepage");
     div.removeChild(notediv);
     notelist.splice(id, 1);
+    localStorage.setItem('Notelist', JSON.stringify(notelist));
+    clearNotes();
 }
 function shareNote(id) {
     var notes = document.getElementById(id);
@@ -26,18 +28,11 @@ function shareNote(id) {
     }
 }
 function showBtn(id) {
-    var btn = document.getElementById(id + "btn");
-    btn.style.visibility = "visible";
-    btn.style.opacity = 1;
-    if (typeof navigator.share !== 'undefined') {
-        var shr = document.getElementById(id + "shr");
-        shr.style.visibility = "visible";
-        shr.style.opacity = 1;
-        setTimeout(function() {fade(btn); fade(shr);}, 1500);
-    }
-    else {
-        setTimeout(function() {fade(btn);}, 1500);
-    }
+    var span = document.getElementById(id + "span");
+    clearInterval(timer[span]);
+    span.style.visibility = "visible";
+    span.style.opacity = 1;
+    setTimeout(function() {fade(span)}, 2500);
 }
 function displayNotes() {
     var retnotelist = localStorage.getItem('Notelist');
@@ -53,19 +48,23 @@ function displayNotes() {
         div.appendChild(notediv);
         var notespan = document.createElement("span");
         notespan.className = "notebuttons";
+        notespan.id = notes + "span";
+        notespan.style.visibility = "hidden";
         notediv.appendChild(notespan);
         var text = document.createElement("textarea");
         text.name = "notes"
         text.cols = 45;
         text.rows = 5;
         text.className = "notelist";
-        text.onfocus = function() {showBtn(this.id);};
+        text.onclick = function() {showBtn(this.id);};
         text.id = notes;
         text.readOnly = "true";
+        console.log(notes);
         if (retnotelist[notes].title != "") {
             text.value = retnotelist[notes].title.toUpperCase() + '\n' + retnotelist[notes].note;
         }
         else { text.value = retnotelist[notes].note;}
+        console.log(text.value);
         notediv.appendChild(text);
         var xBtn = document.createElement("input");
         xBtn.type = "Submit";
@@ -74,7 +73,6 @@ function displayNotes() {
         xBtn.id = notes + "btn";
         xBtn.noteid = notes;
         xBtn.onmouseup = function() {delNote(this.noteid);};
-        xBtn.style.visibility = "hidden";
         notespan.appendChild(xBtn);
         if (typeof navigator.share !== 'undefined') {
             var shrBtn = document.createElement("input");
@@ -84,7 +82,6 @@ function displayNotes() {
             shrBtn.id = notes + "shr";
             shrBtn.noteid = notes;
             shrBtn.onmouseup = function() {shareNote(this.noteid);};
-            shrBtn.style.visibility = "hidden";
             notespan.appendChild(shrBtn); 
         }
     }
@@ -115,10 +112,8 @@ function addNote(head, text) {
 function saveNote(head, text) {
     notelist.unshift({"title": head, "note": text});
     localStorage.setItem('Notelist', JSON.stringify(notelist));
-    var head = document.getElementById("notehead");
-    var body = document.getElementById("note");
-    head.value = "";
-    body.value = "";
+    document.getElementById("notehead").value = "";
+    document.getElementById("note"). value = "";
 }
 function clearWall() {
     var div = document.getElementById("notepage");
